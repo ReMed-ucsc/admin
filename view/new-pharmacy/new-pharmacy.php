@@ -1,37 +1,36 @@
 <?php
-// Start the session
-session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $remedId = $_POST['remedId'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $pharmacyName = $_POST['pharmacyName'] ?? '';
+    $contactNumber = $_POST['contactNumber'] ?? '';
+    $pharmacistName = $_POST['pharmacistName'] ?? '';
+    $licenseNumber = $_POST['licenseNumber'] ?? '';
+    $pharmacyAddress = $_POST['pharmacyAddress'] ?? '';
+    $document = $_FILES['document'] ?? null;
 
-// Check if the user is logged in, if not redirect to login page
-if (!isset($_SESSION['loggedin'])) {
-    header("Location: login.php");
-    exit;
+    // File upload logic (if file is uploaded)
+    if ($document && $document['error'] === 0) {
+        $uploadDir = 'uploads/';
+        $uploadFile = $uploadDir . basename($document['name']);
+        move_uploaded_file($document['tmp_name'], $uploadFile);
+        echo "File uploaded successfully!";
+    }
+
+    // Save data to database or any other logic you want to implement here
+    echo "Pharmacy onboarded successfully!";
 }
-
-// Dummy data for the dashboard
-$registeredPharmacies = 123;
-$onlineUsers = 45;
-$requestedPharmacies = 10;
-
-$recentActivities = [
-    ["time" => "05:38am", "activity" => "Update pharmacy details - Amarasinghe pharmacy"],
-    ["time" => "06:03am", "activity" => "Verify pharmacy - Nilmini Pharmacy"],
-    ["time" => "06:10am", "activity" => "Verify pharmacy - Sujatha Pharmacy"]
-];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - ReMed</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <title>Onboard New Pharmacy</title>
+    <link rel="stylesheet" href="new-pharmacy.css">
 </head>
-
 <body>
-
 
     <!-- Navbar start-->
     <header class="navbar">
@@ -46,13 +45,12 @@ $recentActivities = [
     </header>
     <!-- Navbar end-->
 
-
-    <!-- Dropdown menu start-->
+   <!-- Dropdown menu start-->
     <div id="dropdown-menu" class="dropdown-menu">
 
         <div class="tab">
             <img src="../assest/home.png" alt=""/>
-            <a href="#"> Home</a>
+            <a href="http://localhost/php/view/dashboard/dashboard.php"> Home</a>
         </div>
         
 
@@ -67,7 +65,7 @@ $recentActivities = [
             <div id="pharmacy-submenu" class="submenu">
                 <div class="tab">
                     <img src="../assest/Vector.png" alt="add"/>
-                    <a href="../new-pharmacy/new-pharmacy.php"> Add Pharmacy</a>  
+                    <a href="#"> Add Pharmacy</a>  
                 </div>
                 
             </div>
@@ -143,39 +141,67 @@ $recentActivities = [
     </div>
     <!-- notification end -->
 
-   <!-- dashbordBody start -->
-    <div class="dashboard">
-        <div class="card green">
-            <img src="../assest/statistics.png" alt=""/>
-            <p>Registered Pharmacy</p>
-            <h2><?= $registeredPharmacies ?></h2>
-        </div>
-        <div class="card blue">
-            <img src="../assest/computer.png" alt=""/>
-            <p>Online Users</p>
-            <h2><?= $onlineUsers ?></h2>
-        </div>
-        <div class="card red">
-            <img src="../assest/time-left.png" alt=""/>
-            <p>Requested Pharmacy</p>
-            <h2><?= $requestedPharmacies ?></h2>
-        </div>
-    </div>
     
-    <div class="recent-activity">
-        <h3>Recent Activity</h3>
-        <?php foreach ($recentActivities as $activity): ?>
-            <div class="activity-item">
-                <span class="time"><?= $activity['time'] ?></span>
-                <span class="details"><?= $activity['activity'] ?></span>
+<h2>Onboard New Pharmacy</h2>
+<div class="container">
+    
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="left">
+            <div class="form-group">
+                <label for="remedId">ReMed Pharmacy Id:</label>
+                <input type="text" id="remedId" name="remedId" value="124" readonly>
             </div>
-        <?php endforeach; ?>
+
+            <div class="form-group">
+                <label for="pharmacyName">Pharmacy Name:</label>
+                <input type="text" id="pharmacyName" name="pharmacyName" placeholder="Enter pharmacy name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pharmacistName">Pharmacist's Name:</label>
+                <input type="text" id="pharmacistName" name="pharmacistName" placeholder="Enter pharmacist's name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="licenseNumber">License Number:</label>
+                <input type="text" id="licenseNumber" name="licenseNumber" placeholder="Enter license" required>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="form-group">
+                <label for="document">Document:</label>
+                <input type="file" id="document" name="document">
+            </div>
+        </div>
+
+        <div class="middle">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contactNumber">Contact Number:</label>
+                <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pharmacyAddress">Pharmacy Address:</label>
+                <input type="text" id="pharmacyAddress" name="pharmacyAddress" placeholder="Enter address" required>
+            </div>
+        </div>
+        
+    </form>
+    <div class="form-actions">
+        <button type="submit" class="btn save">Save</button>
+        <button type="button" class="btn cancel" onclick="window.history.back()">Cancel</button>
     </div>
-    <!-- dashbordBody end -->
+</div>
 
 
     <script>
-        // JavaScript to toggle the dropdown menu visibility
+                // JavaScript to toggle the dropdown menu visibility
         document.querySelector('.menu').addEventListener('mouseover', function() {
             var dropdown = document.getElementById('dropdown-menu');
             if (dropdown.style.display === 'none' || dropdown.style.display === '') {
@@ -224,21 +250,6 @@ $recentActivities = [
                 dropdown.style.display = 'none';
             }
         });
-
-        /* click cards */
-        document.querySelector('.green').addEventListener('click',function() {
-            window.location.href='../pharmacy-details/pharmacy-details.php'
-        });
-
-        document.querySelector('.blue').addEventListener('click',function() {
-            window.location.href='../users/users.php'
-        });
-
-        document.querySelector('.red').addEventListener('click',function() {
-            window.location.href='../pending/pending-pharmacy.php'
-        });
     </script>
-
 </body>
-
 </html>

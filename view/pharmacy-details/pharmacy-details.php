@@ -116,7 +116,7 @@
     </div>
     <!-- notification end -->
 
-<!-- Search Box Form -->
+    <!-- Search Box Form -->
     <div class="search-container">
         <input type="text" id="searchInput" class="search-box" placeholder="Search here..." >
         <img src="../assest/search.png" alt="icon">

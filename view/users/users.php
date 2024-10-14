@@ -1,35 +1,25 @@
 <?php
-// Start the session
-session_start();
-
-// Check if the user is logged in, if not redirect to login page
-if (!isset($_SESSION['loggedin'])) {
-    header("Location: login.php");
-    exit;
-}
-
-// Dummy data for the dashboard
-$registeredPharmacies = 123;
-$onlineUsers = 45;
-$requestedPharmacies = 10;
-
-$recentActivities = [
-    ["time" => "05:38am", "activity" => "Update pharmacy details - Amarasinghe pharmacy"],
-    ["time" => "06:03am", "activity" => "Verify pharmacy - Nilmini Pharmacy"],
-    ["time" => "06:10am", "activity" => "Verify pharmacy - Sujatha Pharmacy"]
+// Sample data for demonstration (replace with your own data source or database)
+$users = [
+    ["id" => "01", "name" => "Anura Perera", "age" => 35, "contact" => "+94 11 223 4455", "email" => "anura.perera@gmail.com", "address" => "45 Galle Road, Colombo 03,Colombo District", "status" => "Online"],
+    ["id" => "02", "name" => "Nimalika Silva", "age" => 29, "contact" => "+94 81 238 5523", "email" => "nimalika.silva@yahoo.com", "address" => "12 Kandy Road, Peradeniya, Kandy District", "status" => "Online"],
+    ["id" => "03", "name" => "Roshan Jayawardena", "age" => 42, "contact" => "+94 21 221 3344", "email" => "roshan.jaya@outlook.com", "address" => "25 Station Road, Jaffna,Jaffna District", "status" => "Online"],
+    ["id" => "04", "name" => "Thilina Fernando", "age" => 28, "contact" => "+94 91 224 5566", "email" => "thilina.fernando@gmail.com", "address" => "34 Matara Road, Galle, Galle District", "status" => "Online"],
+    ["id" => "05", "name" => "Kamani Rajapaksha", "age" => 31, "contact" => "+94 52 222 1188", "email" => "kamani.rajapaksha@hotmail.com", "address" => "89 Main Street, Nuwara Eliya, Nuwara Eliya District", "status" => "Online"],
+    ["id" => "06", "name" => "Shani Wijesinghe", "age" => 34, "contact" => "+94 11 223 4455", "email" => "shani.wije@gmail.com", "address" => "45 Galle Road, Colombo 03,Colombo District", "status" => "Online"],
+    ["id" => "07", "name" => "Asela Rathnayake", "age" => 40, "contact" => "+94 81 238 5523", "email" => "asela.rathnayake@yahoo.com", "address" => "12 Kandy Road, Peradeniya, Kandy District", "status" => "Online"],
+    ["id" => "08", "name" => "Pavithra Gunasekara", "age" => 40, "contact" => "+94 91 224 5566", "email" => "pavithra.gunasekara@hotmail.com", "address" => "34 Matara Road, Galle, Galle District", "status" => "Online"]
 ];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - ReMed</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <title>Users Table</title>
+    <link rel="stylesheet" href="users.css">
 </head>
-
 <body>
 
 
@@ -46,13 +36,12 @@ $recentActivities = [
     </header>
     <!-- Navbar end-->
 
-
-    <!-- Dropdown menu start-->
+   <!-- Dropdown menu start-->
     <div id="dropdown-menu" class="dropdown-menu">
 
         <div class="tab">
             <img src="../assest/home.png" alt=""/>
-            <a href="#"> Home</a>
+            <a href="http://localhost/php/view/dashboard/dashboard.php"> Home</a>
         </div>
         
 
@@ -143,35 +132,46 @@ $recentActivities = [
     </div>
     <!-- notification end -->
 
-   <!-- dashbordBody start -->
-    <div class="dashboard">
-        <div class="card green">
-            <img src="../assest/statistics.png" alt=""/>
-            <p>Registered Pharmacy</p>
-            <h2><?= $registeredPharmacies ?></h2>
-        </div>
-        <div class="card blue">
-            <img src="../assest/computer.png" alt=""/>
-            <p>Online Users</p>
-            <h2><?= $onlineUsers ?></h2>
-        </div>
-        <div class="card red">
-            <img src="../assest/time-left.png" alt=""/>
-            <p>Requested Pharmacy</p>
-            <h2><?= $requestedPharmacies ?></h2>
-        </div>
+    <!-- Search Box Form -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search here..." >
+        <img src="../assest/search.png" alt="icon">
+        <!-- <button class="search-button" onclick="performSearch()">Search</button> -->
     </div>
-    
-    <div class="recent-activity">
-        <h3>Recent Activity</h3>
-        <?php foreach ($recentActivities as $activity): ?>
-            <div class="activity-item">
-                <span class="time"><?= $activity['time'] ?></span>
-                <span class="details"><?= $activity['activity'] ?></span>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <!-- dashbordBody end -->
+
+
+
+    <!-- Table Structure -->
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($users as $user): ?>
+                <tr>
+                    <td><?= $user['id'] ?></td>
+                    <td><?= $user['name'] ?></td>
+                    <td><?= $user['age'] ?></td>
+                    <td><?= $user['contact'] ?></td>
+                    <td><?= $user['email'] ?></td>
+                    <td><?= $user['address'] ?></td>
+                    <td><span class="status"><?= $user['status'] ?></span></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+
+
+
 
 
     <script>
@@ -224,21 +224,23 @@ $recentActivities = [
                 dropdown.style.display = 'none';
             }
         });
+            // Function to handle search logic
+        function performSearch() {
+            // Get the search input value
+            var query = document.getElementById('searchInput').value;
 
-        /* click cards */
-        document.querySelector('.green').addEventListener('click',function() {
-            window.location.href='../pharmacy-details/pharmacy-details.php'
-        });
+            // Basic validation for empty input
+            if (query.trim() === "") {
+                alert("Please enter a search query.");
+                return;
+            }
 
-        document.querySelector('.blue').addEventListener('click',function() {
-            window.location.href='../users/users.php'
-        });
-
-        document.querySelector('.red').addEventListener('click',function() {
-            window.location.href='../pending/pending-pharmacy.php'
-        });
-    </script>
-
+            // Simulating search (you can replace this part with actual search logic)
+            var results = "You searched for: " + query;
+            
+            // Display the search results
+            document.getElementById('searchResults').innerText = results;
+        }
+    </script>                                               
 </body>
-
 </html>
