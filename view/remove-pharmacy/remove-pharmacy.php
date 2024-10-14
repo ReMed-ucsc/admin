@@ -1,24 +1,12 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $remedId = $_POST['remedId'] ?? '';
-    $email = $_POST['email'] ?? '';
     $pharmacyName = $_POST['pharmacyName'] ?? '';
-    $contactNumber = $_POST['contactNumber'] ?? '';
     $pharmacistName = $_POST['pharmacistName'] ?? '';
     $licenseNumber = $_POST['licenseNumber'] ?? '';
-    $pharmacyAddress = $_POST['pharmacyAddress'] ?? '';
-    $document = $_FILES['document'] ?? null;
+    $reason = $_POST['reason'] ?? '';
 
-    // File upload logic (if file is uploaded)
-    if ($document && $document['error'] === 0) {
-        $uploadDir = 'uploads/';
-        $uploadFile = $uploadDir . basename($document['name']);
-        move_uploaded_file($document['tmp_name'], $uploadFile);
-        echo "File uploaded successfully!";
-    }
-
-    // Save data to database or any other logic you want to implement here
-    echo "Pharmacy onboarded successfully!";
+    // Delete logic: Here, you'd implement the logic to delete the pharmacy from the system
+    echo "Pharmacy {$pharmacyName} removed for the reason: {$reason}";
 }
 ?>
 
@@ -27,10 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onboard New Pharmacy</title>
-    <link rel="stylesheet" href="new-pharmacy.css">
+    <title>Remove Pharmacy</title>
+    <link rel="stylesheet" href="remove-pharmacy.css">
 </head>
 <body>
+
 
     <!-- Navbar start-->
     <header class="navbar">
@@ -141,64 +130,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <!-- notification end -->
 
-    
-<h2 class="title">Onboard New Pharmacy</h2>
+
+    <h2>Remove Pharmacy on system</h2>
+
 <div class="container">
-    
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form class="form" action="" method="POST">
         <div class="left section">
             <div class="form-group">
-                <label for="remedId">ReMed Pharmacy Id:</label>
-                <input type="text" id="remedId" name="remedId" value="124" readonly>
-            </div>
-
-            <div class="form-group">
                 <label for="pharmacyName">Pharmacy Name:</label>
-                <input type="text" id="pharmacyName" name="pharmacyName" placeholder="Enter pharmacy name" required>
+                <input type="text" id="pharmacyName" name="pharmacyName" value="Medico" readonly>
             </div>
 
             <div class="form-group">
                 <label for="pharmacistName">Pharmacist's Name:</label>
-                <input type="text" id="pharmacistName" name="pharmacistName" placeholder="Enter pharmacist's name" required>
+                <input type="text" id="pharmacistName" name="pharmacistName" value="Mr. Saman" readonly>
             </div>
 
             <div class="form-group">
                 <label for="licenseNumber">License Number:</label>
-                <input type="text" id="licenseNumber" name="licenseNumber" placeholder="Enter license" required>
-            </div>
-        </div>
-
-        <div class="middle section">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="contactNumber">Contact Number:</label>
-                <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
-            </div>
-
-            <div class="form-group">
-                <label for="pharmacyAddress">Pharmacy Address:</label>
-                <input type="text" id="pharmacyAddress" name="pharmacyAddress" placeholder="Enter address" required>
+                <input type="text" id="licenseNumber" name="licenseNumber" value="SL-12345-COLO" readonly>
             </div>
         </div>
         
-         <div class="right section">
-            <div class="form-group">
-                <label for="document">Document:</label>
-                <input type="file" id="document" name="document">
-            </div>
+
+        <div class="form-group section">
+            <label for="reason">Reason for delete pharmacy in system:</label>
+            <select id="reason" name="reason" required>
+                <option value="">Choose the reason</option>
+                <option value="Bad feedback from 10 users">Bad feedback from 10 users</option>
+                <option value="Pharmacist’s request">Pharmacist’s request</option>
+                <option value="Already pharmacy deleted their account">Already pharmacy deleted their account</option>
+            </select>
         </div>
+
 
     </form>
     <div class="form-actions">
-        <button type="submit" class="btn save">Save</button>
-        <button type="button" class="btn cancel" onclick="window.history.back()">Cancel</button>
+        <button type="submit" class="btn delete">Delete</button>
+        <button type="button" class="btn cancel" onclick="window.history.back()">Cancel Delete</button>
     </div>
 </div>
-
 
     <script>
                 // JavaScript to toggle the dropdown menu visibility
@@ -251,5 +222,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         });
     </script>
+
 </body>
 </html>

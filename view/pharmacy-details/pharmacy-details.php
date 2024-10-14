@@ -164,7 +164,7 @@
                     echo "<td>{$pharmacy['email']}</td>";
                     echo "<td>{$pharmacy['address']}</td>";
                     echo "<td><span class='status {$pharmacy['status']}'>{$pharmacy['status']}</span></td>";
-                    echo "<td><a href='#?id={$pharmacy['id']}'><img class=\"action\" src='../assest/pencil.png'/></a>  <a href='#?id={$pharmacy['id']}'><img class=\"action\" src='../assest/bin.png'/></a></td>";
+                    echo "<td><a href='#?id={$pharmacy['id']}'><img class=\"action edit\" src='../assest/pencil.png'/></a>  <a href='#?id={$pharmacy['id']}'><img class=\"action remove\" src='../assest/bin.png'/></a></td>";
                     echo "</tr>";
                 }
                 ?>
@@ -238,7 +238,12 @@
             
             // Display the search results
             document.getElementById('searchResults').innerText = results;
-        }
+        }document.querySelector('.edit').addEventListener('click',function() {
+            window.location.href='../edit-pharmacy/edit-pharmacy.php'
+        });
+        document.querySelector('.remove').addEventListener('click',function() {
+            window.location.href='../remove-pharmacy/remove-pharmacy.php'
+        });
     </script>
 
 </body>

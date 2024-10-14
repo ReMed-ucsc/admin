@@ -241,7 +241,12 @@ $search = $_GET['search'] ?? '';
             
             // Display the search results
             document.getElementById('searchResults').innerText = results;
+
+            
         }
+        document.querySelector('.onboard').addEventListener('click',function() {
+            window.location.href='../new-pharmacy/new-pharmacy.php'
+        });
     </script>
 </body>
 </html>

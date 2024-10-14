@@ -1,6 +1,5 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $remedId = $_POST['remedId'] ?? '';
     $email = $_POST['email'] ?? '';
     $pharmacyName = $_POST['pharmacyName'] ?? '';
     $contactNumber = $_POST['contactNumber'] ?? '';
@@ -18,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Save data to database or any other logic you want to implement here
-    echo "Pharmacy onboarded successfully!";
+    echo "Pharmacy details update successfully!";
 }
 ?>
 
@@ -28,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onboard New Pharmacy</title>
-    <link rel="stylesheet" href="new-pharmacy.css">
+    <link rel="stylesheet" href="edit-pharmacy.css">
 </head>
 <body>
 
@@ -142,16 +141,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- notification end -->
 
     
-<h2 class="title">Onboard New Pharmacy</h2>
+<h2 class="title">Edit Pharmacy Details</h2>
 <div class="container">
     
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="left section">
-            <div class="form-group">
-                <label for="remedId">ReMed Pharmacy Id:</label>
-                <input type="text" id="remedId" name="remedId" value="124" readonly>
-            </div>
-
             <div class="form-group">
                 <label for="pharmacyName">Pharmacy Name:</label>
                 <input type="text" id="pharmacyName" name="pharmacyName" placeholder="Enter pharmacy name" required>
@@ -194,8 +188,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </form>
     <div class="form-actions">
-        <button type="submit" class="btn save">Save</button>
-        <button type="button" class="btn cancel" onclick="window.history.back()">Cancel</button>
+        <button type="submit" class="btn save">Save Changes</button>
+        <button type="button" class="btn cancel" onclick="window.history.back()">Discard Changes</button>
     </div>
 </div>
 
