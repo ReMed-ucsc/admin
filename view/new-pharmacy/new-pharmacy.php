@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-    <!-- Navbar start-->
+   <!-- Navbar start-->
     <header class="navbar">
         <div class="navbar-left">
             <img class="menu" src="../assest/hamburger.png" alt="menu"/>
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="pharmacy-submenu" class="submenu">
                 <div class="tab">
                     <img src="../assest/Vector.png" alt="add"/>
-                    <a href="#"> Add Pharmacy</a>  
+                    <a href="http://localhost/php/view/new-pharmacy/new-pharmacy.php"> Add Pharmacy</a>  
                 </div>
                 
             </div>
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="tab">
             <img src="../assest/user.png" alt="user"/>
-            <a href="#">User</a>
+            <a href="http://localhost/php/view/users/users.php">User</a>
         </div>
         
 
@@ -90,15 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="settings-submenu" class="submenu">
                 <div class="tab">
                     <img src="../assest/settings.png" alt=""/> 
-                    <a href="#">General Settings</a>
+                    <a href="http://localhost/php/view/setting/genaral/genaral.php">General Settings</a>
                 </div>
                 <div class="tab">
                     <img src="../assest/User Management.png" alt=""/>
-                    <a href="#"> User Management</a>
+                    <a href="http://localhost/php/view/setting/account-manage/acount.php"> User Management</a>
                 </div>
                 <div class="tab">
                     <img src="../assest/policy.png" alt=""/>
-                    <a href="#"> Legal & Compliance</a>
+                    <a href="http://localhost/php/view/setting/legal/legal.php"> Legal & Compliance</a>
                 </div>
             </div>
             <!-- Submenu end-->
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="tab">
                 <img src="../assest/setting.png" alt=""/>
-                <a href="#">Setting</a>
+                <a href="../genaral/genaral.php">Setting</a>
             </div>
             <div class="tab">
                 <img src="../assest/logout.png" alt=""/>
@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <!-- notification end -->
 
-    
+
 <h2 class="title">Onboard New Pharmacy</h2>
 <div class="container">
     

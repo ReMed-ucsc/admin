@@ -23,7 +23,7 @@ $users = [
 <body>
 
 
-    <!-- Navbar start-->
+   <!-- Navbar start-->
     <header class="navbar">
         <div class="navbar-left">
             <img class="menu" src="../assest/hamburger.png" alt="menu"/>
@@ -56,7 +56,7 @@ $users = [
             <div id="pharmacy-submenu" class="submenu">
                 <div class="tab">
                     <img src="../assest/Vector.png" alt="add"/>
-                    <a href="../new-pharmacy/new-pharmacy.php"> Add Pharmacy</a>  
+                    <a href="http://localhost/php/view/new-pharmacy/new-pharmacy.php"> Add Pharmacy</a>  
                 </div>
                 
             </div>
@@ -67,7 +67,7 @@ $users = [
 
         <div class="tab">
             <img src="../assest/user.png" alt="user"/>
-            <a href="#">User</a>
+            <a href="http://localhost/php/view/users/users.php">User</a>
         </div>
         
 
@@ -81,15 +81,15 @@ $users = [
             <div id="settings-submenu" class="submenu">
                 <div class="tab">
                     <img src="../assest/settings.png" alt=""/> 
-                    <a href="#">General Settings</a>
+                    <a href="http://localhost/php/view/setting/genaral/genaral.php">General Settings</a>
                 </div>
                 <div class="tab">
                     <img src="../assest/User Management.png" alt=""/>
-                    <a href="#"> User Management</a>
+                    <a href="http://localhost/php/view/setting/account-manage/acount.php"> User Management</a>
                 </div>
                 <div class="tab">
                     <img src="../assest/policy.png" alt=""/>
-                    <a href="#"> Legal & Compliance</a>
+                    <a href="http://localhost/php/view/setting/legal/legal.php"> Legal & Compliance</a>
                 </div>
             </div>
             <!-- Submenu end-->
@@ -111,7 +111,7 @@ $users = [
             </div>
             <div class="tab">
                 <img src="../assest/setting.png" alt=""/>
-                <a href="#">Setting</a>
+                <a href="../genaral/genaral.php">Setting</a>
             </div>
             <div class="tab">
                 <img src="../assest/logout.png" alt=""/>
@@ -131,6 +131,7 @@ $users = [
         </div>
     </div>
     <!-- notification end -->
+
 
     <!-- Search Box Form -->
     <div class="search-container">
